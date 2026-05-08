@@ -15,17 +15,21 @@ kg_rate = st.number_input(
 
 if kg_rate > 0:
 
-    # Original raw silver price per gram
+    # Raw silver price per gram
     raw_gram_rate = kg_rate / 1000
 
-    # 92.5 Silver + 105 extra
-    silver_925_rate = raw_gram_rate + 105
+    # 92.5 Silver with 13% wastage
+    wastage_percent = 13
+
+    silver_925_rate = raw_gram_rate + (
+        raw_gram_rate * wastage_percent / 100
+    )
 
     # Show prices
     st.success(f"Price per gram: ₹{round(raw_gram_rate,2)}")
 
     st.info(
-        f"92.5 Silver + 105 Wastage Price per gram: ₹{round(silver_925_rate,2)}"
+        f"92.5 Silver + {wastage_percent}% Wastage = ₹{round(silver_925_rate,2)} per gram"
     )
 
     st.subheader("Quick Price Buttons")
